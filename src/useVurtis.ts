@@ -188,8 +188,5 @@ export function useVurtis({
     // absolute positioning. This may be necessary for animation.
     getSpaceBefore,
     getSpaceAfter,
-
-    // TODO: Temporary for "overlay" testing.
-    // listWidth,
   };
 }

@@ -1,4 +1,4 @@
-import type {ResizeCamelBox, ResizeKebabBox} from './types.js';
+import type {ResizeCamelBox, ResizeKebabBox} from './types';
 
 export function convertKebabToCamel(size?: ResizeKebabBox): ResizeCamelBox {
   switch (size) {
@@ -14,7 +14,7 @@ export function convertKebabToCamel(size?: ResizeKebabBox): ResizeCamelBox {
 export function extractSize(
   entry?: ResizeObserverEntry,
   box: ResizeCamelBox = 'borderBoxSize',
-  sizeType: keyof ResizeObserverSize = 'inlineSize'
+  sizeType: keyof ResizeObserverSize = 'inlineSize',
 ) {
   let size = 0;
 
@@ -28,7 +28,7 @@ export function extractSize(
     const firstValue = entry[box][0];
     size = firstValue ? firstValue[sizeType] : 0;
   } else {
-    // @ts-ignore Support Firefox's non-standard behavior.
+    // @ts-expect-error Support Firefox's non-standard behavior.
     const nonStandardValue = entry[box][sizeType] as number;
     size = nonStandardValue ?? 0;
   }

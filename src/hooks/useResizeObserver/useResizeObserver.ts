@@ -1,11 +1,11 @@
 import {useRef, useState, type RefObject} from 'react';
+import {supportResizeObserver} from 'beeftools';
 
-import {supportResizeObserver} from '../../utilities/index.js';
-import {useIsoEffect} from '../useIsoEffect.js';
-import {useMounted} from '../useMounted.js';
+import {useIsoEffect} from '../useIsoEffect';
+import {useMounted} from '../useMounted';
 
-import type {ResizeKebabBox} from './types.js';
-import {convertKebabToCamel, extractSize} from './utilities.js';
+import type {ResizeKebabBox} from './types';
+import {convertKebabToCamel, extractSize} from './utilities';
 
 interface Size {
   width: number;

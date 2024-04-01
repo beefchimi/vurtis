@@ -7,18 +7,18 @@ export {
   useWindowEvent,
   type WindowEventName,
   type WindowEventFn,
-} from './useWindowEvent.js';
+} from './useWindowEvent';
 
 export {
   useWindowScroll,
   measureScroll,
   type WindowScrollOptions,
   type WindowScrollData,
-} from './useWindowScroll.js';
+} from './useWindowScroll';
 
 export {
   useWindowSize,
   measureWindow,
   type WindowSizeOptions,
   type WindowSizeData,
-} from './useWindowSize.js';
+} from './useWindowSize';

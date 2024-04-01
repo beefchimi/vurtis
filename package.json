@@ -75,9 +75,11 @@
     "vitest": "^1.4.0"
   },
   "dependencies": {
+    "beeftools": "^0.0.2",
     "react": "^18.2.0"
   },
   "peerDependencies": {
+    "beeftools": "^0.0.2",
     "react": "^18.2.0"
   }
 }
