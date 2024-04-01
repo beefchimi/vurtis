@@ -177,8 +177,9 @@ As mentioned above, this package is for a very specific virtualization pattern. 
 
 1. Support for variable height items.
 2. Support for horizontal scrolling lists.
-3. Debounced window listeners (scroll/resize).
-4. Recommended solutions for animation.
-5. Fully SSR / RSC compatible.
-6. Tests.
-7. etc...
+3. Support for non-window containers.
+4. Debounced window listeners (scroll/resize).
+5. Recommended solutions for animation.
+6. Fully SSR / RSC compatible.
+7. Tests.
+8. etc...
