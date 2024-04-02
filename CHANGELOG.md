@@ -1,5 +1,11 @@
 # vurtis
 
+## 0.0.4
+
+### Patch Changes
+
+- 277aee7: Fix React install.
+
 ## 0.0.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "vurtis",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Fluid grid virtualization for React",
   "author": "Curtis Dulmage",
   "license": "ISC",
