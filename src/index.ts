@@ -1,3 +1,5 @@
+export * from './hooks';
+
 export {useVurtis, type VurtisOptions} from './useVurtis';
 
 export type {
