@@ -34,7 +34,6 @@ export function useVurtis({
   minWidth = MIN_ITEM_SIZE,
   gap = 0,
 }: VurtisOptions) {
-  // const isMounted = useMounted();
   const listRef = useRef<VurtisListElement>(null);
 
   const [columns, setColumns] = useState(1);
@@ -178,15 +177,37 @@ export function useVurtis({
   }, [virtualItems]);
 
   return {
+    // Required props:
     listRef,
-    updateItemHeight,
-    listHeight,
     virtualItems,
-    rangeStart,
-    rangeEnd,
+
+    // Layout strategy 1:
+    // Apply `listHeight` and absolutely position all items.
+    listHeight,
+
+    // Layout strategy 2:
     // Useful for layouts that want to use a CSS grid instead of
     // absolute positioning. This may be necessary for animation.
     getSpaceBefore,
     getSpaceAfter,
+
+    // Optionally pass `updateItemHeight` as `ref` (ideally
+    // only to 1 item) in order to more accurately measure
+    // item height across all resize operations.
+    updateItemHeight,
+
+    // Additional props
+    // None of these should be required for a functional
+    // virtualized list, but might be useful for debugging.
+    columns,
+    rangeStart,
+    rangeEnd,
+    listWidth,
+    listVisibleHeight,
+    itemWidth,
+    itemHeight,
+    scrollY,
+    documentHeight,
+    windowHeight,
   };
 }
