@@ -169,6 +169,54 @@ ul {
 
 NOTE: For this to work, you will need the `minWidth / gap` values passed to `useVurtis` to be in sync with your CSS. It is recommended you share these “style tokens” so that they can never deviate.
 
+## Debounce / throttle helper
+
+Perhaps you require some side-effects for when a value returned by `useVurtis()` changes. At the moment, nothing internal to `useVurtis()` is debounced/throttled, since all the relevant measurements need to be computed quickly in order to give a smooth UX. Throwing some expensive side-effects on top of that could cause a lot of re-rendering issues for your UI. If this is the cause, you may want to leverage the `useVurttle()` hook.
+
+```tsx
+export function MyComponent() {
+  const {listRef, listWidth, listHeight, virtualItems, updateItemHeight} =
+    useVurtis({
+      count: 20,
+      minWidth: 100,
+      gap: 10,
+    });
+
+  // Will flip back-and-forth between `true/false` during resize operations.
+  // When `true`, you can refrain from additional computations - such as animations.
+  // Passing the 2nd `debounce` argument will further limit `pending` changes.
+  const pending = useVurttle(listWidth, true);
+
+  useEffect(() => {
+    console.log('Some side-effect goes here...', pending);
+  }, [pending]);
+
+  const itemsMarkup = virtualItems.map(
+    ({order, top, left, width, height}, index) => {
+      return (
+        <li
+          key={`Item-${order}`}
+          ref={index === 0 ? updateItemHeight : undefined}
+          style={{top, left, width}}
+        >
+          <span>{order}</span>
+        </li>
+      );
+    },
+  );
+
+  return (
+    <div>
+      <p>Pending: {pending.toString()}</p>
+
+      <ul ref={listRef} style={{height: listHeight}}>
+        {itemsMarkup}
+      </ul>
+    </div>
+  );
+}
+```
+
 ## Notes
 
 As mentioned above, this package is for a very specific virtualization pattern. As such, there are a number of missing features / optimizations that you may otherwise expect to have. Some of these things _could be added in the future..._ but I make no guarantee.
