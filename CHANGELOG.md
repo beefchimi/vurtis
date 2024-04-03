@@ -1,5 +1,11 @@
 # vurtis
 
+## 0.0.6
+
+### Patch Changes
+
+- 8100537: Add an optional debounce argument to useVurttle().
+
 ## 0.0.5
 
 ### Patch Changes
