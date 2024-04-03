@@ -4,6 +4,12 @@ export {useIsoEffect} from './useIsoEffect';
 export {useMounted} from './useMounted';
 
 export {
+  useTimeout,
+  type TimeoutCallback,
+  type TimeoutOptions,
+} from './useTimeout';
+
+export {
   useWindowEvent,
   type WindowEventName,
   type WindowEventFn,
