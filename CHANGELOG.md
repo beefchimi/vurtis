@@ -1,5 +1,11 @@
 # vurtis
 
+## 0.0.5
+
+### Patch Changes
+
+- 3643541: Export useTimeout() and useVurttle() hooks.
+
 ## 0.0.4
 
 ### Patch Changes
