@@ -36,6 +36,9 @@ export function useVurtis({
 }: VurtisOptions) {
   const listRef = useRef<VurtisListElement>(null);
 
+  // TODO: If `count` or `minwidth` is `0`, we need a way to
+  // effectively disable as much logic as possible.
+
   const [columns, setColumns] = useState(1);
   const [rangeStart, setRangeStart] = useState(0);
   const [rangeEnd, setRangeEnd] = useState(0);
@@ -137,7 +140,7 @@ export function useVurtis({
     const indexEnd = (rowsBefore + visibleRowsAdjusted) * columns;
 
     // The math is not quite accurate, since `indexEnd` could end up
-    // higher than `count`, or less than count when scroll to bottom.
+    // higher than `count`, or less than `count` when scroll to bottom.
     const indexEndWithinRange = Math.min(count, indexEnd);
     const indexEndAdjusted =
       count - indexEndWithinRange <= columns ? count : indexEndWithinRange;
