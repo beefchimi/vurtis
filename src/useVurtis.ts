@@ -25,10 +25,6 @@ export interface VurtisOptions {
 const MIN_ITEM_SIZE = 10;
 const MIN_DEVICE_WIDTH = 320;
 
-// TODO: Referencing the following prototypes:
-// 1. https://stackblitz.com/edit/react-virtual-fluid-grid?terminal=dev
-// 2. https://stackblitz.com/edit/react-virtual-fluid-grid-fixed?terminal=dev
-// 3. https://stackblitz.com/edit/react-virtual-fluid-grid-padding?terminal=dev
 export function useVurtis({
   count = 0,
   minWidth = MIN_ITEM_SIZE,
