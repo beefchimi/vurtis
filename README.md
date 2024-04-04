@@ -6,7 +6,7 @@
 
 This package was created to satisfy a very specific use-case for virtualization in `React`. If you have a fluid grid of uniform height items, this is the package for you! Otherwise, you probably want `@tanstack/react-virtual`.
 
-_Demo link will be available soon!_
+[Check out the StackBlitz demo](https://stackblitz.com/edit/vurtis)
 
 ## Install
 

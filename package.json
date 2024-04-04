@@ -56,8 +56,9 @@
     "release:publish": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
-    "@types/node": "^20.12.2",
+    "@types/node": "^20.12.4",
     "@types/react": "^18.2.74",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@vitest/coverage-v8": "^1.4.0",
@@ -72,8 +73,8 @@
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
-    "typescript": "^5.4.3",
-    "vite": "^5.2.7",
+    "typescript": "^5.4.4",
+    "vite": "^5.2.8",
     "vite-plugin-dts": "^3.8.1",
     "vitest": "^1.4.0"
   },

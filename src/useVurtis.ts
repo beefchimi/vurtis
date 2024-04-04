@@ -25,16 +25,15 @@ export interface VurtisOptions {
 const MIN_ITEM_SIZE = 10;
 const MIN_DEVICE_WIDTH = 320;
 
-// TODO: Referencing the following prototypes:
-// 1. https://stackblitz.com/edit/react-virtual-fluid-grid?terminal=dev
-// 2. https://stackblitz.com/edit/react-virtual-fluid-grid-fixed?terminal=dev
-// 3. https://stackblitz.com/edit/react-virtual-fluid-grid-padding?terminal=dev
 export function useVurtis({
   count = 0,
   minWidth = MIN_ITEM_SIZE,
   gap = 0,
 }: VurtisOptions) {
   const listRef = useRef<VurtisListElement>(null);
+
+  // TODO: If `count` or `minwidth` is `0`, we need a way to
+  // effectively disable as much logic as possible.
 
   const [columns, setColumns] = useState(1);
   const [rangeStart, setRangeStart] = useState(0);
@@ -137,7 +136,7 @@ export function useVurtis({
     const indexEnd = (rowsBefore + visibleRowsAdjusted) * columns;
 
     // The math is not quite accurate, since `indexEnd` could end up
-    // higher than `count`, or less than count when scroll to bottom.
+    // higher than `count`, or less than `count` when scroll to bottom.
     const indexEndWithinRange = Math.min(count, indexEnd);
     const indexEndAdjusted =
       count - indexEndWithinRange <= columns ? count : indexEndWithinRange;
