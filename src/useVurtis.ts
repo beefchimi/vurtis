@@ -52,17 +52,12 @@ export function useVurtis({
   // It might make sense to cache the captured element. That way,
   // we can re-use it within `onResize`. Only grab `firstElementChild`
   // if the cached `itemRef` is `null`.
-  const updateItemHeight = useCallback(
-    (element: VurtisItemElement | null) => {
-      // Should we prefer `Math.round`?
-      const newHeight = element
-        ? Math.ceil(element.getBoundingClientRect().height)
-        : itemHeight;
-
-      setItemHeight(newHeight);
-    },
-    [itemHeight],
-  );
+  const updateItemHeight = useCallback((element: VurtisItemElement | null) => {
+    // Should we prefer `Math.round`?
+    if (element) {
+      setItemHeight(Math.ceil(element.getBoundingClientRect().height));
+    }
+  }, []);
 
   const {
     scrollY,
