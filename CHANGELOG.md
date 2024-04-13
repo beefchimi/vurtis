@@ -1,5 +1,11 @@
 # vurtis
 
+## 0.0.7
+
+### Patch Changes
+
+- [#16](https://github.com/beefchimi/vurtis/pull/16) [`f4461c2`](https://github.com/beefchimi/vurtis/commit/f4461c2dfa3f8f65d16fe291fd15acaeeea3f0db) Thanks [@beefchimi](https://github.com/beefchimi)! - Remove itemHeight from updateItemHeight dependency.
+
 ## 0.0.6
 
 ### Patch Changes
