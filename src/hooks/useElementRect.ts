@@ -22,17 +22,32 @@ const INITIAL_RECT: RectSubset = {
   height: 0,
 };
 
+function extractRectSubset(
+  {top, right, bottom, left, width, height}: DOMRect,
+  round = false,
+) {
+  return {
+    top: round ? Math.round(top) : top,
+    right: round ? Math.round(right) : right,
+    bottom: round ? Math.round(bottom) : bottom,
+    left: round ? Math.round(left) : left,
+    width: round ? Math.round(width) : width,
+    height: round ? Math.round(height) : height,
+  };
+}
+
 // TODO: Do we want to create and provide the `ref`,
 // or accept it as an option?
-export function useElementRect() {
+export function useElementRect(round = false) {
   const ref = useRef<HTMLElement>(null);
   const [rect, setRect] = useState<RectSubset>(INITIAL_RECT);
 
   const updateRect = useCallback(() => {
-    if (ref.current) {
-      setRect(ref.current.getBoundingClientRect());
-    }
-  }, []);
+    if (!ref.current) return;
+
+    const domRect = ref.current.getBoundingClientRect();
+    setRect(extractRectSubset(domRect, round));
+  }, [round]);
 
   const {scrollX, scrollY, visibleWidth, visibleHeight} = useWindowScroll({
     updateStrategy: 'aggressive',
@@ -42,11 +57,12 @@ export function useElementRect() {
 
   useIsoEffect(() => {
     updateRect();
-  }, [scrollX, scrollY, visibleWidth, visibleHeight]);
+  }, [updateRect, scrollX, scrollY, visibleWidth, visibleHeight]);
 
   return {
     ref,
-    rect,
     updateRect,
+    // Destructuring the `rect` as an alternative to memoizing the object.
+    ...rect,
   };
 }
