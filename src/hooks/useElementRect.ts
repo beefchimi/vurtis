@@ -52,7 +52,12 @@ export function useElementRect(round = false) {
     [round],
   );
 
-  const {scrollX, scrollY, visibleWidth, visibleHeight} = useWindowScroll({
+  const {
+    scrollX,
+    scrollY,
+    visibleWidth: windowWidth,
+    visibleHeight: windowHeight,
+  } = useWindowScroll({
     updateStrategy: 'aggressive',
   });
 
@@ -65,12 +70,16 @@ export function useElementRect(round = false) {
 
   useIsoEffect(() => {
     updateRect(ref.current);
-  }, [updateRect, scrollX, scrollY, visibleWidth, visibleHeight]);
+  }, [updateRect, scrollX, scrollY, windowWidth, windowHeight]);
 
   return {
     ref,
     updateRect,
     // Destructuring the `rect` as an alternative to memoizing the object.
     ...rect,
+    // Returning some of our `window` values as they could
+    // be useful to consumers.
+    windowWidth,
+    windowHeight,
   };
 }
