@@ -39,7 +39,7 @@ function extractRectSubset(
 // TODO: Do we want to create and provide the `ref`,
 // or accept it as an option?
 export function useElementRect(round = false) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement | null>(null);
   const [rect, setRect] = useState<RectSubset>(INITIAL_RECT);
 
   const updateRect = useCallback(() => {
