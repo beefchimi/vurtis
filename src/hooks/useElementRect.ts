@@ -36,27 +36,35 @@ function extractRectSubset(
   };
 }
 
-// TODO: Do we want to create and provide the `ref`,
-// or accept it as an option?
 export function useElementRect(round = false) {
   const ref = useRef<HTMLElement | null>(null);
   const [rect, setRect] = useState<RectSubset>(INITIAL_RECT);
 
-  const updateRect = useCallback(() => {
-    if (!ref.current) return;
+  const updateRect = useCallback(
+    (element?: HTMLElement | null) => {
+      if (!element) return;
 
-    const domRect = ref.current.getBoundingClientRect();
-    setRect(extractRectSubset(domRect, round));
-  }, [round]);
+      const domRect = element.getBoundingClientRect();
+      ref.current = element;
+
+      setRect(extractRectSubset(domRect, round));
+    },
+    [round],
+  );
 
   const {scrollX, scrollY, visibleWidth, visibleHeight} = useWindowScroll({
     updateStrategy: 'aggressive',
   });
 
-  useResizeObserver({ref, onResize: updateRect});
+  useResizeObserver({
+    ref,
+    onResize: () => {
+      updateRect(ref.current);
+    },
+  });
 
   useIsoEffect(() => {
-    updateRect();
+    updateRect(ref.current);
   }, [updateRect, scrollX, scrollY, visibleWidth, visibleHeight]);
 
   return {
