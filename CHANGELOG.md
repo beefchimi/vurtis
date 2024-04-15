@@ -1,5 +1,11 @@
 # vurtis
 
+## 0.0.8
+
+### Patch Changes
+
+- [#18](https://github.com/beefchimi/vurtis/pull/18) [`5f7d98b`](https://github.com/beefchimi/vurtis/commit/5f7d98b140a48d4bb9efc0c50d4d4522886ad1c2) Thanks [@beefchimi](https://github.com/beefchimi)! - updateRect now takes element as an argument.
+
 ## 0.0.7
 
 ### Patch Changes
