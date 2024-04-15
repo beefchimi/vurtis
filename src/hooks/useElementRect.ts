@@ -36,33 +36,50 @@ function extractRectSubset(
   };
 }
 
-// TODO: Do we want to create and provide the `ref`,
-// or accept it as an option?
 export function useElementRect(round = false) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement | null>(null);
   const [rect, setRect] = useState<RectSubset>(INITIAL_RECT);
 
-  const updateRect = useCallback(() => {
-    if (!ref.current) return;
+  const updateRect = useCallback(
+    (element?: HTMLElement | null) => {
+      if (!element) return;
 
-    const domRect = ref.current.getBoundingClientRect();
-    setRect(extractRectSubset(domRect, round));
-  }, [round]);
+      const domRect = element.getBoundingClientRect();
+      ref.current = element;
 
-  const {scrollX, scrollY, visibleWidth, visibleHeight} = useWindowScroll({
+      setRect(extractRectSubset(domRect, round));
+    },
+    [round],
+  );
+
+  const {
+    scrollX,
+    scrollY,
+    visibleWidth: windowWidth,
+    visibleHeight: windowHeight,
+  } = useWindowScroll({
     updateStrategy: 'aggressive',
   });
 
-  useResizeObserver({ref, onResize: updateRect});
+  useResizeObserver({
+    ref,
+    onResize: () => {
+      updateRect(ref.current);
+    },
+  });
 
   useIsoEffect(() => {
-    updateRect();
-  }, [updateRect, scrollX, scrollY, visibleWidth, visibleHeight]);
+    updateRect(ref.current);
+  }, [updateRect, scrollX, scrollY, windowWidth, windowHeight]);
 
   return {
     ref,
     updateRect,
     // Destructuring the `rect` as an alternative to memoizing the object.
     ...rect,
+    // Returning some of our `window` values as they could
+    // be useful to consumers.
+    windowWidth,
+    windowHeight,
   };
 }
