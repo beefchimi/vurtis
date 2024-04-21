@@ -1,6 +1,6 @@
 export * from './useResizeObserver';
 
-export {useElementRect} from './useElementRect';
+export {useElementRect, type ElementRectOptions} from './useElementRect';
 export {useIsoEffect} from './useIsoEffect';
 export {useMounted} from './useMounted';
 

@@ -1,7 +1,10 @@
 import {useCallback, useRef, useState} from 'react';
 
 import {useIsoEffect} from './useIsoEffect';
-import {useResizeObserver} from './useResizeObserver';
+import {
+  useResizeObserver,
+  type ResizeObserverOptions,
+} from './useResizeObserver';
 import {useWindowScroll} from './useWindowScroll';
 
 interface RectSubset {
@@ -11,6 +14,11 @@ interface RectSubset {
   left: number;
   width: number;
   height: number;
+}
+
+export interface ElementRectOptions {
+  forceReconnect?: ResizeObserverOptions['forceReconnect'];
+  round?: boolean;
 }
 
 const INITIAL_RECT: RectSubset = {
@@ -36,13 +44,19 @@ function extractRectSubset(
   };
 }
 
-export function useElementRect(round = false) {
+export function useElementRect({
+  forceReconnect = 0,
+  round = false,
+}: ElementRectOptions) {
   const ref = useRef<HTMLElement | null>(null);
   const [rect, setRect] = useState<RectSubset>(INITIAL_RECT);
 
   const updateRect = useCallback(
     (element?: HTMLElement | null) => {
-      if (!element) return;
+      if (!element) {
+        setRect(INITIAL_RECT);
+        return;
+      }
 
       const domRect = element.getBoundingClientRect();
       ref.current = element;
@@ -63,6 +77,7 @@ export function useElementRect(round = false) {
 
   useResizeObserver({
     ref,
+    forceReconnect,
     onResize: () => {
       updateRect(ref.current);
     },
@@ -79,6 +94,8 @@ export function useElementRect(round = false) {
     ...rect,
     // Returning some of our `window` values as they could
     // be useful to consumers.
+    scrollX,
+    scrollY,
     windowWidth,
     windowHeight,
   };
