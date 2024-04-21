@@ -75,7 +75,7 @@ export function useElementRect({
     updateStrategy: 'aggressive',
   });
 
-  useResizeObserver({
+  const {observerRef} = useResizeObserver({
     ref,
     forceReconnect,
     onResize: () => {
@@ -90,6 +90,7 @@ export function useElementRect({
   return {
     ref,
     updateRect,
+    observerRef,
     // Destructuring the `rect` as an alternative to memoizing the object.
     ...rect,
     // Returning some of our `window` values as they could
