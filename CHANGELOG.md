@@ -1,5 +1,13 @@
 # vurtis
 
+## 0.0.9
+
+### Patch Changes
+
+- [#20](https://github.com/beefchimi/vurtis/pull/20) [`33a90d9`](https://github.com/beefchimi/vurtis/commit/33a90d9630262300f610d79c5804c7afac6a2f11) Thanks [@beefchimi](https://github.com/beefchimi)! - useElementRect now requires an object argument.
+
+- [#20](https://github.com/beefchimi/vurtis/pull/20) [`33a90d9`](https://github.com/beefchimi/vurtis/commit/33a90d9630262300f610d79c5804c7afac6a2f11) Thanks [@beefchimi](https://github.com/beefchimi)! - Expose observerRef from useResizeObserver and useElementRect.
+
 ## 0.0.8
 
 ### Patch Changes
