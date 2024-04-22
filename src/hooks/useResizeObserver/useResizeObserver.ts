@@ -17,6 +17,10 @@ interface Size {
 export interface ResizeObserverOptions<T extends HTMLElement = HTMLElement> {
   ref: RefObject<T>;
   box?: ResizeKebabBox;
+  // In case you need to `disconnect/re-connect` the observer,
+  // perhaps because you are re-using a `ref` for different `nodes`,
+  // you can increment the `forceReconnect` prop.
+  forceReconnect?: number;
   onResize?: (size: Size) => void;
 }
 
@@ -35,11 +39,13 @@ const initialSize: Size = {
 export function useResizeObserver<T extends HTMLElement = HTMLElement>({
   ref,
   box = 'border-box',
+  forceReconnect = 0,
   onResize,
-}: ResizeObserverOptions<T>): Size {
+}: ResizeObserverOptions<T>) {
   const [{width, height}, setSize] = useState<Size>(initialSize);
-
   const previousSize = useRef<Size>({...initialSize});
+
+  const observerRef = useRef<ResizeObserver>();
   const onResizeRef = useRef<((size: Size) => void) | undefined>(onResize);
 
   const isMounted = useMounted();
@@ -47,7 +53,7 @@ export function useResizeObserver<T extends HTMLElement = HTMLElement>({
   useIsoEffect(() => {
     if (!ref.current || !supportResizeObserver()) return;
 
-    const observer = new ResizeObserver(([entry]) => {
+    observerRef.current = new ResizeObserver(([entry]) => {
       const camelBox = convertKebabToCamel(box);
 
       const newWidth = extractSize(entry, camelBox, 'inlineSize');
@@ -71,12 +77,12 @@ export function useResizeObserver<T extends HTMLElement = HTMLElement>({
       }
     });
 
-    observer.observe(ref.current, {box});
+    observerRef.current.observe(ref.current, {box});
 
     return () => {
-      observer.disconnect();
+      observerRef.current?.disconnect();
     };
-  }, [box, ref, isMounted]);
+  }, [box, ref, forceReconnect, isMounted]);
 
-  return {width, height};
+  return {width, height, observerRef};
 }
