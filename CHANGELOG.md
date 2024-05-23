@@ -1,5 +1,11 @@
 # vurtis
 
+## 0.0.11
+
+### Patch Changes
+
+- [#24](https://github.com/beefchimi/vurtis/pull/24) [`1b21428`](https://github.com/beefchimi/vurtis/commit/1b21428b49a0b98c6114ec64468c363798f57b5a) Thanks [@beefchimi](https://github.com/beefchimi)! - Various package updates.
+
 ## 0.0.10
 
 ### Patch Changes
