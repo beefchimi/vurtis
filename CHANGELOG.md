@@ -1,5 +1,11 @@
 # vurtis
 
+## 0.0.12
+
+### Patch Changes
+
+- [#26](https://github.com/beefchimi/vurtis/pull/26) [`ea34f6c`](https://github.com/beefchimi/vurtis/commit/ea34f6c66f451e589fd1abd3279b3e7c2d17e85b) Thanks [@beefchimi](https://github.com/beefchimi)! - Switch to eslint flat config.
+
 ## 0.0.11
 
 ### Patch Changes
